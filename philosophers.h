@@ -6,17 +6,18 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:20:19 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/16 15:31:59 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:16:05 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
 # include <pthread.h> //-pthread flag necessary
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
 
 typedef struct s_philo
 {
