@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:11:22 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/23 15:42:23 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:39:04 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static int	init_philos(t_info *data)
 	temp_ph = malloc(data->forks * sizeof(t_philo));
 	while (i < data->forks)
 	{
-		temp_ph[i].l_fork = TRUE; //self fork
-		temp_ph[i].r_fork = FALSE; // next philosopher's fork
+		temp_ph[i].l_fork = TRUE;
+		temp_ph[i].r_fork = FALSE;
 		temp_ph[i].is_eating = FALSE;
-		temp_ph[i].last_meal = 200; //get timestamp
+		temp_ph[i].last_meal = 200;
 		i++;
 	}
 	data->philos = temp_ph;
@@ -55,6 +55,35 @@ static int	init_data(int argc, char **argv, t_info *data)
 	return (0);
 }
 
+void	*one_routine(void *time)
+{
+	struct timeval	start_time;
+	struct timeval	finish_time;
+	long int		start;
+	long int		end;
+
+	gettimeofday(&start_time, NULL);
+	start = start_time.tv_sec * 1000 + start_time.tv_usec / 1000;
+	printf("%d 1 is thinking\n", 0);
+	usleep(*(int *)time * 1000);
+	gettimeofday(&finish_time, NULL);
+	end = finish_time.tv_sec * 1000 + finish_time.tv_usec / 1000;
+	printf("%ld 1 died\n", end - start);
+	return (NULL);
+}
+
+void	handle_one_thread(t_info *data)
+{
+	pthread_t	t1;
+
+	if (pthread_create(&t1, NULL, &one_routine, &data->time_to_die))
+		exit(1);
+	if (pthread_join(t1, NULL))
+		exit(2);
+	free(data->philos);
+	exit(0);
+}
+
 //prints to see if values are right:
 // printf("philosophers/forks: %i\n", philos.forks);
 // printf("time to die: %i\n", philos.time_to_die);
@@ -71,6 +100,8 @@ int	main(int argc, char **argv)
 	error = init_data(argc, argv, &data);
 	if (error != 0)
 		display_error_msg(error);
+	if (data.forks == 1)
+		handle_one_thread(&data);
 	if (launch_threads(&data))
 	{
 		printf("Error while creating a thread!\n");
