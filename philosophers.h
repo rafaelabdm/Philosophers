@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:20:19 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/23 15:26:49 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:32:28 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 typedef struct s_philo
 {
-	int	r_fork;
 	int	l_fork;
+	int	r_fork;
 	int	is_eating;
 	int	last_meal;
 }	t_philo;

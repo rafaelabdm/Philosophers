@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:11:22 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/23 15:23:46 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:42:23 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,20 @@
 
 static int	init_philos(t_info *data)
 {
-	(void) data;
+	t_philo	*temp_ph;
+	int		i;
+
+	i = 0;
+	temp_ph = malloc(data->forks * sizeof(t_philo));
+	while (i < data->forks)
+	{
+		temp_ph[i].l_fork = TRUE; //self fork
+		temp_ph[i].r_fork = FALSE; // next philosopher's fork
+		temp_ph[i].is_eating = FALSE;
+		temp_ph[i].last_meal = 200; //get timestamp
+		i++;
+	}
+	data->philos = temp_ph;
 	return (0);
 }
 
@@ -63,5 +76,6 @@ int	main(int argc, char **argv)
 		printf("Error while creating a thread!\n");
 		return (1);
 	}
+	free(data.philos);
 	return (0);
 }
