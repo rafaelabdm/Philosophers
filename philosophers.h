@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:20:19 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/23 14:23:18 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:09:49 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,25 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+# define TRUE 1
+# define FALSE 0
+
+typedef struct s_philo
+{
+	int	r_fork;
+	int	l_fork;
+	int is_eating;
+	int	last_meal;
+}	t_philo;
+
 typedef struct s_info
 {
-	int	forks;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	eat_count;
+	int		forks;
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
+	int		eat_count;
+	t_philo	*philos;
 }	t_info;
 
 //functions
