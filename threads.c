@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_test.c                                      :+:      :+:    :+:   */
+/*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:43:37 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/23 13:38:05 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:23:39 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,14 @@ void	*routine2(void *ptr)
 	return (NULL);
 }
 
-// gcc -Wall -Wextra -Werror -pthread thread_test.c
-int	main(int argc, char **argv)
+int	launch_threads(t_info *philos)
 {
 	pthread_t *th;
 	int	j;
-	int	count;
 
-	if (argc != 2)
-		return (1);
-	count = philo_atoi(argv[1]);
-	th = malloc(count * sizeof(pthread_t));
+	th = malloc(philos->forks * sizeof(pthread_t));
 	j = -1;
-	while (++j < count)
+	while (++j < philos->forks)
 	{
 		int	*i;
 		i = malloc(sizeof(int));
@@ -60,7 +55,7 @@ int	main(int argc, char **argv)
 			return (1);
 	}
 	j = -1;
-	while (++j < count)
+	while (++j < philos->forks)
 	{
 		if (pthread_join(th[j], NULL)) //wait for threads
 			return (2);

@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:20:19 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/16 18:16:05 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:23:18 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-typedef struct s_philo
+typedef struct s_info
 {
 	int	forks;
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	eat_count;
-}	t_philo;
+}	t_info;
 
 //functions
 //philo_utils.c
@@ -36,5 +36,8 @@ void	philo_bzero(void *s, size_t n);
 //error.c
 int		check_args(int argc, char **argv);
 void	display_error_msg(int error);
+
+//threads.c
+int		launch_threads(t_info *philos);
 
 #endif

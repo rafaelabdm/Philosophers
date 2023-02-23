@@ -6,13 +6,13 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:11:22 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/16 15:46:44 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:23:07 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	init_philos(int argc, char **argv, t_philo *philos)
+int	init_philos(int argc, char **argv, t_info *philos)
 {
 	int	args_err;
 
@@ -35,20 +35,27 @@ int	init_philos(int argc, char **argv, t_philo *philos)
 	return (0);
 }
 
+//prints to see if values are right:
+// printf("philosophers/forks: %i\n", philos.forks);
+// printf("time to die: %i\n", philos.time_to_die);
+// printf("time to eat: %i\n", philos.time_to_eat);
+// printf("time to sleep: %i\n", philos.time_to_sleep);
+// printf("number of times each philosopher must eat: %i\n", \
+// 	philos.eat_count);
+
 int	main(int argc, char **argv)
 {
-	t_philo	philos;
+	t_info	philos;
 	int		error;
 
-	philo_bzero(&philos, sizeof(t_philo));
+	philo_bzero(&philos, sizeof(t_info));
 	error = init_philos(argc, argv, &philos);
 	if (error != 0)
 		display_error_msg(error);
-	printf("philosophers/forks: %i\n", philos.forks);
-	printf("time to die: %i\n", philos.time_to_die);
-	printf("time to eat: %i\n", philos.time_to_eat);
-	printf("time to sleep: %i\n", philos.time_to_sleep);
-	printf("number of times each philosopher must eat: %i\n", \
-		philos.eat_count);
+	if (launch_threads(&philos))
+	{
+		printf("Error while creating a thread!\n");
+		return (1);
+	}
 	return (0);
 }
