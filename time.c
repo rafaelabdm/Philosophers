@@ -6,24 +6,26 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:24 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/23 14:28:51 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:26:12 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 //test function that shows time in miliseconds
-void	*routine()
+	//1 microsecond == 0,001 milisecond
+	//1 second == 1000 miliseconds
+
+void	*routine(void)
 {
-	struct timeval start_time;
-	struct timeval finish_time;
+	struct timeval	start_time;
+	struct timeval	finish_time;
 
 	gettimeofday(&start_time, NULL);
 	sleep(1);
 	gettimeofday(&finish_time, NULL);
-	//1 microsecond == 0,001 milisecond
-	//o tempo que vou printar a mensagem - o tempo que começamos o programa = timestamp
-	printf("miliseconds: %ld\n", ((finish_time.tv_sec * 1000 + finish_time.tv_usec / 1000) - \
+	printf("miliseconds: %ld\n", \
+	((finish_time.tv_sec * 1000 + finish_time.tv_usec / 1000) - \
 	(start_time.tv_sec * 1000 + start_time.tv_usec / 1000)));
 	printf("TESTE!\n");
 	return (NULL);

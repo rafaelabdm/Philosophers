@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:11:22 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/23 15:16:51 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:23:46 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ static int	init_data(int argc, char **argv, t_info *data)
 // printf("time to die: %i\n", philos.time_to_die);
 // printf("time to eat: %i\n", philos.time_to_eat);
 // printf("time to sleep: %i\n", philos.time_to_sleep);
-// printf("number of times each philosopher must eat: %i\n", \
-// 	philos.eat_count);
+// printf("number of times each philosopher must eat: %i\n", philos.eat_count);
 
 int	main(int argc, char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:43:37 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/23 14:54:18 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:27:14 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	*routine2(void *ptr)
 
 int	launch_threads(t_info *philos)
 {
-	pthread_t *th;
-	int	j;
+	pthread_t	*th;
+	int			j;
 
 	th = malloc(philos->forks * sizeof(pthread_t));
 	j = -1;
