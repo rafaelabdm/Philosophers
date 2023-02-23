@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:19:13 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/16 16:22:17 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:03:31 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int	philo_atoi(const char *nptr)
 	i = 0;
 	z = 0;
 	ret = 0;
+	if (nptr[i] == '+')
+	{
+		i++;
+		z++;
+	}
 	while (nptr[i] == '0')
 	{
 		i++;
