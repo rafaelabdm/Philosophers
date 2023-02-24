@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:20:19 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/24 20:21:17 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/24 22:04:29 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@
 typedef struct s_philo
 {
 	int				id;
-	int				my_fork;
-	int				next_fork;
+	pthread_mutex_t	*forks;
 	int				is_eating;
 	int				last_meal;
 	struct s_info	*data;
@@ -34,10 +33,11 @@ typedef struct s_philo
 
 typedef struct s_info
 {
-	int			forks;
+	int			n_philos;
 	int			time_to_die;
 	int			time_to_eat;
 	int			time_to_sleep;
+	int			time_to_think;
 	int			eat_count;
 	long int	start_time;
 	t_philo		*philos;

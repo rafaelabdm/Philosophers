@@ -6,23 +6,57 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:43:37 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/24 16:43:33 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/24 22:33:04 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	has_died(t_philo *phi)
+{
+	long int	time;
+
+	time = get_current_time(phi->data->start_time) - phi->last_meal;
+	if (time >= phi->data->time_to_die)
+		return (1);
+	return (0);
+}
 
 void	*routine2(void *ptr)
 {
 	t_philo	*phi;
 
 	phi = (t_philo *)ptr;
-	// printf("Thread %d my_fork %d.\n", phi->id, phi->my_fork);
-	// printf("Thread %d next_fork %d.\n", phi->id, phi->next_fork);
-	// printf("Thread %d is eating %d.\n", phi->id, phi->is_eating);
-	// printf("Thread %d last meal %d.\n", phi->id, phi->last_meal);
-	if (phi->my_fork && phi->next_fork)
-		printf("Thread %d is eating!\n", phi->id);
+	while(!has_died(phi))
+	{
+		pthread_mutex_lock(&phi->forks[phi->id]);
+		pthread_mutex_lock(&phi->forks[(phi->id + 1) % phi->data->n_philos]);
+		
+		if (has_died(phi))
+		{
+			printf("%ld %d has died.\n", get_current_time(phi->data->start_time), phi->id);
+			exit(10);
+		}
+		printf("%ld %d has taken a fork.\n", get_current_time(phi->data->start_time), phi->id);
+		printf("%ld %d has taken a fork.\n", get_current_time(phi->data->start_time), phi->id);
+		printf("%ld %d is eating.\n", get_current_time(phi->data->start_time), phi->id);
+		phi->last_meal = get_current_time(phi->data->start_time);
+		usleep(phi->data->time_to_eat * 1000);
+		
+		pthread_mutex_unlock(&phi->forks[phi->id]);
+		pthread_mutex_unlock(&phi->forks[(phi->id + 1) % phi->data->n_philos]);
+		
+		printf("%ld %d is sleeping.\n", get_current_time(phi->data->start_time), phi->id);
+		usleep(phi->data->time_to_sleep * 1000);
+		if (has_died(phi))
+		{
+			printf("%ld %d has died.\n", get_current_time(phi->data->start_time), phi->id);
+			exit(10);
+		}
+		printf("%ld %d is thinking.\n", get_current_time(phi->data->start_time), phi->id);
+	}
+	printf("%ld %d has died.\n", get_current_time(phi->data->start_time), phi->id);
+	exit(12);
 	return (NULL);
 }
 
@@ -31,15 +65,16 @@ int	launch_threads(t_info *data)
 	pthread_t	*th;
 	int			j;
 
-	th = malloc(data->forks * sizeof(pthread_t));
+	th = malloc(data->n_philos * sizeof(pthread_t));
 	j = -1;
-	while (++j < data->forks)
+	data->start_time = get_start_time();
+	while (++j < data->n_philos)
 	{
 		if (pthread_create(&th[j], NULL, &routine2, &data->philos[j]))
 			return (1);
 	}
 	j = -1;
-	while (++j < data->forks)
+	while (++j < data->n_philos)
 	{
 		if (pthread_join(th[j], NULL))
 			return (2);
