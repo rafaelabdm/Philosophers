@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:43:37 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/23 15:38:04 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:43:33 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ void	*routine2(void *ptr)
 	t_philo	*phi;
 
 	phi = (t_philo *)ptr;
-	printf("Threads l_fork %d.\n", phi->l_fork);
-	printf("Threads r_fork %d.\n", phi->r_fork);
-	printf("Threads is eating %d.\n", phi->is_eating);
-	printf("Threads last meal %d.\n", phi->last_meal);
+	// printf("Thread %d my_fork %d.\n", phi->id, phi->my_fork);
+	// printf("Thread %d next_fork %d.\n", phi->id, phi->next_fork);
+	// printf("Thread %d is eating %d.\n", phi->id, phi->is_eating);
+	// printf("Thread %d last meal %d.\n", phi->id, phi->last_meal);
+	if (phi->my_fork && phi->next_fork)
+		printf("Thread %d is eating!\n", phi->id);
 	return (NULL);
 }
 
@@ -33,7 +35,7 @@ int	launch_threads(t_info *data)
 	j = -1;
 	while (++j < data->forks)
 	{
-		if (pthread_create(&th[j], NULL, &routine2, data->philos))
+		if (pthread_create(&th[j], NULL, &routine2, &data->philos[j]))
 			return (1);
 	}
 	j = -1;

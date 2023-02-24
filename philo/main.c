@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:11:22 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/24 15:18:50 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:40:44 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,20 @@ static int	init_philos(t_info *data)
 	temp_ph = malloc(data->forks * sizeof(t_philo));
 	while (i < data->forks)
 	{
-		temp_ph[i].l_fork = TRUE;
-		temp_ph[i].r_fork = FALSE;
+		temp_ph[i].id = i;
+		if (i % 2 == 0)
+		{
+			temp_ph[i].my_fork = TRUE;
+			temp_ph[i].next_fork = TRUE;
+		}
+		else
+		{
+			temp_ph[i].my_fork = FALSE;
+			temp_ph[i].next_fork = FALSE;
+		}
 		temp_ph[i].is_eating = FALSE;
 		temp_ph[i].last_meal = 200;
+		temp_ph[i].data = data;
 		i++;
 	}
 	data->philos = temp_ph;
@@ -82,13 +92,6 @@ void	handle_one_thread(t_info *data)
 	free(data->philos);
 	exit(0);
 }
-
-//prints to see if values are right:
-// printf("philosophers/forks: %i\n", philos.forks);
-// printf("time to die: %i\n", philos.time_to_die);
-// printf("time to eat: %i\n", philos.time_to_eat);
-// printf("time to sleep: %i\n", philos.time_to_sleep);
-// printf("number of times each philosopher must eat: %i\n", philos.eat_count);
 
 int	main(int argc, char **argv)
 {
