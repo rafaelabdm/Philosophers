@@ -6,11 +6,26 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:11:22 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/27 17:36:55 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 19:01:38 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void	free_all(t_info *data)
+{
+	int	i;
+
+	pthread_mutex_destroy(&data->print_mutex);
+	pthread_mutex_destroy(&data->stop_mutex);
+	pthread_mutex_destroy(&data->full_mutex);
+	pthread_mutex_destroy(&data->last_meal_mutex);
+	i = -1;
+	while (++i < data->n_philos)
+		pthread_mutex_destroy(&data->philos[0].forks[i]);
+	free(data->philos[0].forks);
+	free(data->philos);
+}
 
 void	*one_routine(void *info)
 {
@@ -19,7 +34,7 @@ void	*one_routine(void *info)
 
 	data = (t_info *)info;
 	data->start_time = get_start_time();
-	printf("%d 1 is thinking\n", 0);
+	printf("%d 1 has taken a fork\n", 0);
 	usleep(data->time_to_die * 1000);
 	current_time = get_current_time(data->start_time);
 	printf("%ld 1 died\n", current_time);
@@ -36,6 +51,7 @@ void	handle_one_thread(t_info *data)
 		exit(2);
 	pthread_mutex_destroy(&data->print_mutex);
 	pthread_mutex_destroy(&data->stop_mutex);
+	pthread_mutex_destroy(&data->philos[0].forks[0]);
 	free(data->philos[0].forks);
 	free(data->philos);
 	exit(0);
@@ -57,6 +73,6 @@ int	main(int argc, char **argv)
 		printf("Error while creating a thread!\n");
 		return (1);
 	}
-	free(data.philos);
+	free_all(&data);
 	return (0);
 }

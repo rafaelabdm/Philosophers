@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:53:33 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/27 17:24:16 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:24:56 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	init_data(int argc, char **argv, t_info *data)
 		return (args_err);
 	pthread_mutex_init(&data->print_mutex, NULL);
 	pthread_mutex_init(&data->stop_mutex, NULL);
+	pthread_mutex_init(&data->full_mutex, NULL);
+	pthread_mutex_init(&data->last_meal_mutex, NULL);
 	init_philos(data);
 	return (0);
 }

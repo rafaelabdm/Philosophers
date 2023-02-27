@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:20:19 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/27 17:24:05 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:24:43 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_info
 	t_philo			*philos;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	stop_mutex;
+	pthread_mutex_t	full_mutex;
+	pthread_mutex_t	last_meal_mutex;
 }	t_info;
 
 //functions

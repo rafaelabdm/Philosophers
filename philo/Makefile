@@ -6,36 +6,38 @@
 #    By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/14 17:47:18 by rabustam          #+#    #+#              #
-#    Updated: 2023/02/27 14:54:01 by rabustam         ###   ########.fr        #
+#    Updated: 2023/02/27 18:07:46 by rabustam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-PHILOSOPHERS	= philosophers
+NAME		= philosophers
 
-SRC		= main.c philo_utils.c error.c threads.c time.c init.c
+SRC			= main.c philo_utils.c error.c threads.c time.c init.c
 
-OBJ		= main.o philo_utils.o error.o threads.o time.o init.o
+OBJ			= main.o philo_utils.o error.o threads.o time.o init.o
 
-FLAGS	= -Wall -Werror -Wextra -g
+FLAGS		= -Wall -Werror -Wextra -g
 
-THFLAG	= -pthread
+THFLAG		= -pthread
 
-CC		= cc $(FLAGS) $(THFLAG)
+HEL_GRIND	= valgrind --tool=helgrind
 
-all:	$(PHILOSOPHERS)
+CC			= cc $(FLAGS) $(THFLAG)
+
+all:	$(NAME)
 
 .c.o: $(SRC)
 		cc -Wall -Wextra -Werror -c -o $@ $<
 
 
-$(PHILOSOPHERS) : $(OBJ)
+$(NAME) : $(OBJ)
 	$(CC) $(OBJ) -o $@
 
 clean :
 		rm -f *.o
 	
 fclean: clean
-		rm -f $(PHILOSOPHERS)
+		rm -f $(NAME)
 
 re: fclean all
 
