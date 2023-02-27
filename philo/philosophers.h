@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:20:19 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/24 22:04:29 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:57:14 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ typedef struct s_info
 }	t_info;
 
 //functions
+//init.c
+int			init_data(int argc, char **argv, t_info *data);
+
 //philo_utils.c
 int			philo_atoi(const char *nptr);
 void		philo_bzero(void *s, size_t n);

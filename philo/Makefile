@@ -6,15 +6,15 @@
 #    By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/14 17:47:18 by rabustam          #+#    #+#              #
-#    Updated: 2023/02/24 15:08:39 by rabustam         ###   ########.fr        #
+#    Updated: 2023/02/27 14:54:01 by rabustam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PHILOSOPHERS	= philosophers
 
-SRC		= main.c philo_utils.c error.c threads.c time.c
+SRC		= main.c philo_utils.c error.c threads.c time.c init.c
 
-OBJ		= main.o philo_utils.o error.o threads.o time.o
+OBJ		= main.o philo_utils.o error.o threads.o time.o init.o
 
 FLAGS	= -Wall -Werror -Wextra -g
 
