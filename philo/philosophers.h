@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:20:19 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/27 15:12:21 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:24:05 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,33 @@
 # define TRUE 1
 # define FALSE 0
 
+# define THINK 10
+# define SLEEP 11
+# define FORK 12
+# define EAT 13
+# define DIE 14
+
 typedef struct s_philo
 {
 	int				id;
 	pthread_mutex_t	*forks;
-	int				is_eating;
 	int				last_meal;
+	int				is_full;
 	struct s_info	*data;
 }	t_philo;
 
 typedef struct s_info
 {
-	int			n_philos;
-	int			time_to_die;
-	int			time_to_eat;
-	int			time_to_sleep;
-	int			time_to_think;
-	int			eat_count;
-	int			has_anyone_died;
-	long int	start_time;
-	t_philo		*philos;
+	int				n_philos;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				eat_count;
+	int				has_anyone_died;
+	long int		start_time;
+	t_philo			*philos;
+	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	stop_mutex;
 }	t_info;
 
 //functions

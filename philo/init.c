@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:53:33 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/27 15:40:03 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:24:16 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static int	init_philos(t_info *data)
 		temp_ph[i].forks = philo_forks;
 		pthread_mutex_init(&philo_forks[i], NULL);
 		temp_ph[i].id = i;
-		temp_ph[i].is_eating = FALSE;
-		temp_ph[i].last_meal = 200;
+		temp_ph[i].last_meal = 0;
+		temp_ph[i].is_full = 0;
 		temp_ph[i].data = data;
 		i++;
 	}
@@ -57,8 +57,6 @@ static int	set_stats(int argc, char **argv, t_info *data)
 	data->time_to_sleep == -1 || data->eat_count == -1 || \
 	data->n_philos == -1)
 		return (-3);
-	data->time_to_think = data->time_to_die - data->time_to_sleep \
-	- data->time_to_eat;
 	return (0);
 }
 
@@ -74,6 +72,8 @@ int	init_data(int argc, char **argv, t_info *data)
 	args_err = set_stats(argc, argv, data);
 	if (args_err < 0)
 		return (args_err);
+	pthread_mutex_init(&data->print_mutex, NULL);
+	pthread_mutex_init(&data->stop_mutex, NULL);
 	init_philos(data);
 	return (0);
 }

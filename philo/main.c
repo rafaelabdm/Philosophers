@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:11:22 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/27 15:00:46 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:36:55 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	handle_one_thread(t_info *data)
 		exit(1);
 	if (pthread_join(t1, NULL))
 		exit(2);
+	pthread_mutex_destroy(&data->print_mutex);
+	pthread_mutex_destroy(&data->stop_mutex);
 	free(data->philos[0].forks);
 	free(data->philos);
 	exit(0);
