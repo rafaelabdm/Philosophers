@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:43:37 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/27 19:12:16 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 23:00:45 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,16 @@ void	print_action(t_philo *phi, int act)
 
 void	eating(t_philo *phi)
 {
-	pthread_mutex_lock(&phi->forks[phi->id]);
-	pthread_mutex_lock(&phi->forks[(phi->id + 1) % phi->data->n_philos]);
+	if (phi->id + 1 == phi->data->n_philos)
+	{
+		pthread_mutex_lock(&phi->forks[(phi->id + 1) % phi->data->n_philos]);
+		pthread_mutex_lock(&phi->forks[phi->id]);
+	}
+	else
+	{
+		pthread_mutex_lock(&phi->forks[phi->id]);
+		pthread_mutex_lock(&phi->forks[(phi->id + 1) % phi->data->n_philos]);	
+	}
 	print_action(phi, FORK);
 	print_action(phi, FORK);
 	pthread_mutex_lock(&phi->data->last_meal_mutex);
