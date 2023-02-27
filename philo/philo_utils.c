@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:19:13 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/23 13:03:31 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:38:04 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	philo_atoi(const char *nptr)
 		ret = ret * 10 + (nptr[i] - 48);
 		i++;
 	}
-	if (ret > 2147483647 || i - z > 11)
+	if (ret > 2147483647 || i - z > 11 || ret == 0)
 		return (-1);
 	return ((int) ret);
 }

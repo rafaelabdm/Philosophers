@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:24 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/24 22:06:59 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:20:33 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	//1 microsecond == 0,001 milisecond
 	//1 second == 1000 miliseconds
 
-long int		get_start_time(void)
+long int	get_start_time(void)
 {
 	struct timeval	start_time;
 	long int		ret;

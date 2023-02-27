@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:53:33 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/27 14:56:57 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:40:03 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,35 @@ static int	init_philos(t_info *data)
 	return (0);
 }
 
-int	init_data(int argc, char **argv, t_info *data)
+static int	set_stats(int argc, char **argv, t_info *data)
 {
-	int	args_err;
-
-	data->start_time = 0;
-	data->philos = NULL;
-	if (argc < 5 || argc > 6)
-		return (-1);
-	args_err = check_args(argc, argv);
-	if (args_err != 0)
-		return (args_err);
 	data->n_philos = philo_atoi(argv[1]);
-	if (data->n_philos == 0)
-		return (-4);
 	data->time_to_die = philo_atoi(argv[2]);
 	data->time_to_eat = philo_atoi(argv[3]);
 	data->time_to_sleep = philo_atoi(argv[4]);
 	if (argc == 6)
 		data->eat_count = philo_atoi(argv[5]);
 	if (data->time_to_die == -1 || data->time_to_eat == -1 || \
-	data->time_to_sleep == -1 || data->eat_count == -1)
+	data->time_to_sleep == -1 || data->eat_count == -1 || \
+	data->n_philos == -1)
 		return (-3);
 	data->time_to_think = data->time_to_die - data->time_to_sleep \
 	- data->time_to_eat;
+	return (0);
+}
+
+int	init_data(int argc, char **argv, t_info *data)
+{
+	int	args_err;
+
+	if (argc < 5 || argc > 6)
+		return (-1);
+	args_err = check_args(argc, argv);
+	if (args_err < 0)
+		return (args_err);
+	args_err = set_stats(argc, argv, data);
+	if (args_err < 0)
+		return (args_err);
 	init_philos(data);
 	return (0);
 }

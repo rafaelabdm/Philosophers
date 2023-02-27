@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:22:29 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/16 16:19:26 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:40:59 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,8 @@ void	display_error_msg(int error)
 		printf("\nError: Neither time(s) nor people can be negative. \
 C'mon man...\n");
 	else if (error == -3)
-		printf("\nError: Arguments must be integers. Remember to respect \
-the boundries.\n");
-	else if (error == -4)
-		printf("\nError: There must be at least one philosopher in the \
-sim.\n");
+		printf("\nError: Arguments must be integers greater than zero. \
+Remember to respect the boundries.\n");
 	else if (error == -5)
 		printf("\nError: Empty string? Realy???\n");
 	printf("Usage: number_of_philosophers time_to_die time_to_eat time_to_sleep \

@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:20:19 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/27 14:57:14 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:12:21 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_info
 	int			time_to_sleep;
 	int			time_to_think;
 	int			eat_count;
+	int			has_anyone_died;
 	long int	start_time;
 	t_philo		*philos;
 }	t_info;

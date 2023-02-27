@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:43:37 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/27 14:46:26 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:44:04 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ int	has_died(t_philo *phi)
 
 	time = get_current_time(phi->data->start_time) - phi->last_meal;
 	if (time >= phi->data->time_to_die)
+	{
+		printf("%ld %d has died.\n", get_current_time(phi->data->start_time), \
+		phi->id + 1);
 		return (1);
+	}
 	return (0);
 }
 
@@ -27,16 +31,11 @@ void	*routine2(void *ptr)
 	t_philo	*phi;
 
 	phi = (t_philo *)ptr;
-	while(!has_died(phi))
+	while (!has_died(phi))
 	{
 		pthread_mutex_lock(&phi->forks[phi->id]);
 		pthread_mutex_lock(&phi->forks[(phi->id + 1) % phi->data->n_philos]);
 		
-		if (has_died(phi))
-		{
-			printf("%ld %d has died.\n", get_current_time(phi->data->start_time), phi->id + 1);
-			exit(10);
-		}
 		printf("%ld %d has taken a fork.\n", get_current_time(phi->data->start_time), phi->id + 1);
 		printf("%ld %d has taken a fork.\n", get_current_time(phi->data->start_time), phi->id + 1);
 		printf("%ld %d is eating.\n", get_current_time(phi->data->start_time), phi->id + 1);
@@ -48,15 +47,9 @@ void	*routine2(void *ptr)
 		
 		printf("%ld %d is sleeping.\n", get_current_time(phi->data->start_time), phi->id + 1);
 		usleep(phi->data->time_to_sleep * 1000);
-		if (has_died(phi))
-		{
-			printf("%ld %d has died.\n", get_current_time(phi->data->start_time), phi->id + 1);
-			exit(10);
-		}
+
 		printf("%ld %d is thinking.\n", get_current_time(phi->data->start_time), phi->id + 1);
 	}
-	printf("%ld %d has died.\n", get_current_time(phi->data->start_time), phi->id + 1);
-	exit(12);
 	return (NULL);
 }
 
