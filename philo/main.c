@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:11:22 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/24 22:05:39 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:45:54 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	init_philos(t_info *data)
 	{
 		temp_ph[i].forks = philo_forks;
 		pthread_mutex_init(&philo_forks[i], NULL);
-		temp_ph[i].id = i + 1;
+		temp_ph[i].id = i;
 		temp_ph[i].is_eating = FALSE;
 		temp_ph[i].last_meal = 200;
 		temp_ph[i].data = data;

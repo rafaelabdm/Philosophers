@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:43:37 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/24 22:33:04 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:46:26 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,28 @@ void	*routine2(void *ptr)
 		
 		if (has_died(phi))
 		{
-			printf("%ld %d has died.\n", get_current_time(phi->data->start_time), phi->id);
+			printf("%ld %d has died.\n", get_current_time(phi->data->start_time), phi->id + 1);
 			exit(10);
 		}
-		printf("%ld %d has taken a fork.\n", get_current_time(phi->data->start_time), phi->id);
-		printf("%ld %d has taken a fork.\n", get_current_time(phi->data->start_time), phi->id);
-		printf("%ld %d is eating.\n", get_current_time(phi->data->start_time), phi->id);
+		printf("%ld %d has taken a fork.\n", get_current_time(phi->data->start_time), phi->id + 1);
+		printf("%ld %d has taken a fork.\n", get_current_time(phi->data->start_time), phi->id + 1);
+		printf("%ld %d is eating.\n", get_current_time(phi->data->start_time), phi->id + 1);
 		phi->last_meal = get_current_time(phi->data->start_time);
 		usleep(phi->data->time_to_eat * 1000);
 		
 		pthread_mutex_unlock(&phi->forks[phi->id]);
 		pthread_mutex_unlock(&phi->forks[(phi->id + 1) % phi->data->n_philos]);
 		
-		printf("%ld %d is sleeping.\n", get_current_time(phi->data->start_time), phi->id);
+		printf("%ld %d is sleeping.\n", get_current_time(phi->data->start_time), phi->id + 1);
 		usleep(phi->data->time_to_sleep * 1000);
 		if (has_died(phi))
 		{
-			printf("%ld %d has died.\n", get_current_time(phi->data->start_time), phi->id);
+			printf("%ld %d has died.\n", get_current_time(phi->data->start_time), phi->id + 1);
 			exit(10);
 		}
-		printf("%ld %d is thinking.\n", get_current_time(phi->data->start_time), phi->id);
+		printf("%ld %d is thinking.\n", get_current_time(phi->data->start_time), phi->id + 1);
 	}
-	printf("%ld %d has died.\n", get_current_time(phi->data->start_time), phi->id);
+	printf("%ld %d has died.\n", get_current_time(phi->data->start_time), phi->id + 1);
 	exit(12);
 	return (NULL);
 }
