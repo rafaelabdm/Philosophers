@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:22:29 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/27 15:40:59 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:57:10 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,4 @@ Remember to respect the boundries.\n");
 		printf("\nError: Empty string? Realy???\n");
 	printf("Usage: number_of_philosophers time_to_die time_to_eat time_to_sleep \
 [number_of_times_each_philosopher_must_eat]\n\n");
-	exit(1);
 }
