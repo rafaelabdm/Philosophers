@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:43:37 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/28 14:33:22 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:50:31 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,13 @@ int	has_died(t_philo *phi)
 	return (ret);
 }
 
-void	print_action(t_philo *phi, int act)
+void	print_action(t_philo *phi, char *act)
 {
 	if (has_died(phi))
 		return ;
 	pthread_mutex_lock(&phi->data->print_mutex);
-	if (act == EAT)
-		printf("%ld %d is eating.\n", get_current_time(phi->data->start_time), phi->id + 1);
-	else if (act == SLEEP)
-		printf("%ld %d is sleeping.\n", get_current_time(phi->data->start_time), phi->id + 1);
-	else if (act == THINK)
-		printf("%ld %d is thinking.\n", get_current_time(phi->data->start_time), phi->id + 1);
-	else if (act == FORK)
-		printf("%ld %d has taken a fork.\n", get_current_time(phi->data->start_time), phi->id + 1);	
+	printf("%ld %d %s.\n", get_current_time(phi->data->start_time), \
+	phi->id + 1, act);
 	pthread_mutex_unlock(&phi->data->print_mutex);
 }
 

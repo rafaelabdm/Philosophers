@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:20:19 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/27 18:24:43 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:49:22 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # define TRUE 1
 # define FALSE 0
 
-# define THINK 10
-# define SLEEP 11
-# define FORK 12
-# define EAT 13
-# define DIE 14
+# define THINK "is thinking"
+# define SLEEP "is sleeping"
+# define FORK "has taken a fork"
+# define EAT "is eating"
+# define DIE "has died"
 
 typedef struct s_philo
 {
