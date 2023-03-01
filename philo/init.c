@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:53:33 by rabustam          #+#    #+#             */
-/*   Updated: 2023/03/01 15:22:45 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:02:22 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ static pthread_mutex_t	*alloc_forks(int n_philos)
 	if (!ret)
 		exit(11);
 	return (ret);
+}
+
+static void	init_forks(t_philo *phi, pthread_mutex_t **forks, int i, int total)
+{
+	if (i + 1 == total)
+	{
+		phi->l_fork = &(*forks)[(i + 1) % total];
+		phi->r_fork = &(*forks)[i];
+	}
+	else
+	{
+		phi->l_fork = &(*forks)[i];
+		phi->r_fork = &(*forks)[(i + 1) % total];
+	}
 }
 
 static int	init_philos(t_info *data)
@@ -37,16 +51,7 @@ static int	init_philos(t_info *data)
 	i = -1;
 	while (++i < data->n_philos)
 	{
-		if (i + 1 == data->n_philos)
-		{
-			temp_ph[i].l_fork = &philo_forks[(i + 1) % data->n_philos];
-			temp_ph[i].r_fork = &philo_forks[i];
-		}
-		else
-		{
-			temp_ph[i].l_fork = &philo_forks[i];
-			temp_ph[i].r_fork = &philo_forks[(i + 1) % data->n_philos];
-		}
+		init_forks(&temp_ph[i], &philo_forks, i, data->n_philos);
 		temp_ph[i].id = i;
 		temp_ph[i].last_meal = data->start_time;
 		temp_ph[i].is_full = 0;

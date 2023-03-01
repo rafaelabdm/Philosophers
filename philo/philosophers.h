@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:20:19 by rabustam          #+#    #+#             */
-/*   Updated: 2023/03/01 14:39:04 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:23:20 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_info
 int			init_data(int argc, char **argv, t_info *data);
 
 //philo_utils.c
+long int	philo_print(t_philo *phi, int act);
 int			philo_atoi(const char *nptr);
 void		philo_bzero(void *s, size_t n);
 
@@ -67,10 +68,16 @@ void		philo_bzero(void *s, size_t n);
 int			check_args(int argc, char **argv);
 void		display_error_msg(int error);
 
-//threads.c
-int			launch_threads(t_info *philos);
+//threads_actions.c
+void		*routine(void *ptr);
+int			eating(t_philo *phi);
+int			sleeping(t_philo *phi);
+int			thinking(t_philo *phi);
+int			has_died(t_philo *phi);
 
 //time.c
 long int	get_current_time(void);
-void	my_sleep(int sleep, long int last_meal);
+void		my_sleep(int sleep, long int last_meal);
+void		*check_time(void *ptr);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:11:22 by rabustam          #+#    #+#             */
-/*   Updated: 2023/03/01 14:28:17 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:25:34 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,30 @@ int	handle_one_thread(t_info *data)
 	return (0);
 }
 
+static int	launch_threads(t_info *data)
+{
+	pthread_t	*th;
+	int			j;
+
+	th = malloc((data->n_philos + 1) * sizeof(pthread_t));
+	j = -1;
+	while (++j < data->n_philos)
+	{
+		if (pthread_create(&th[j], NULL, &routine, &data->philos[j]))
+			return (1);
+	}
+	if (pthread_create(&th[j], NULL, &check_time, data))
+		return (1);
+	j = -1;
+	while (++j < data->n_philos + 1)
+	{
+		if (pthread_join(th[j], NULL))
+			return (2);
+	}
+	free(th);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_info	data;
@@ -63,7 +87,7 @@ int	main(int argc, char **argv)
 	if (error != 0)
 	{
 		display_error_msg(error);
-		return (1);	
+		return (1);
 	}
 	if (data.n_philos == 1)
 		return (handle_one_thread(&data));
