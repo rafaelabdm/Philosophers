@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 13:11:22 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/28 14:00:36 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:28:17 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	free_all(t_info *data)
 	pthread_mutex_destroy(&data->last_meal_mutex);
 	i = -1;
 	while (++i < data->n_philos)
-		pthread_mutex_destroy(&data->philos[0].forks[i]);
-	free(data->philos[0].forks);
+		pthread_mutex_destroy(&data->forks[i]);
+	free(data->forks);
 	free(data->philos);
 }
 
@@ -33,11 +33,11 @@ void	*one_routine(void *info)
 	t_info			*data;
 
 	data = (t_info *)info;
-	data->start_time = get_start_time();
+	data->start_time = get_current_time();
 	printf("%d 1 has taken a fork\n", 0);
 	usleep(data->time_to_die * 1000);
-	current_time = get_current_time(data->start_time);
-	printf("%ld 1 died\n", current_time);
+	current_time = get_current_time();
+	printf("%ld 1 died\n", current_time - data->start_time);
 	return (NULL);
 }
 
@@ -49,12 +49,7 @@ int	handle_one_thread(t_info *data)
 		return (1);
 	if (pthread_join(t1, NULL))
 		return (2);
-	pthread_mutex_destroy(&data->print_mutex);
-	pthread_mutex_destroy(&data->stop_mutex);
-	pthread_mutex_destroy(&data->philos[0].forks[0]);
-	pthread_mutex_destroy(&data->last_meal_mutex);
-	free(data->philos[0].forks);
-	free(data->philos);
+	free_all(data);
 	return (0);
 }
 

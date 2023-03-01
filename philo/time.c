@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:24 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/27 15:20:33 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:59:26 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	//1 microsecond == 0,001 milisecond
 	//1 second == 1000 miliseconds
 
-long int	get_start_time(void)
+long int	get_current_time(void)
 {
 	struct timeval	start_time;
 	long int		ret;
@@ -26,12 +26,14 @@ long int	get_start_time(void)
 	return (ret);
 }
 
-long int	get_current_time(long int start)
+void	my_sleep(int sleep, long int last_meal)
 {
-	struct timeval	end_time;
-	long int		end;
+	long int	start;
 
-	gettimeofday(&end_time, NULL);
-	end = end_time.tv_sec * 1000 + end_time.tv_usec / 1000;
-	return (end - start);
+	start = get_current_time();
+	while (start - last_meal < sleep)
+	{
+		start = get_current_time();
+		usleep(100);
+	}
 }

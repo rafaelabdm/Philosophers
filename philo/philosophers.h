@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:20:19 by rabustam          #+#    #+#             */
-/*   Updated: 2023/02/28 14:49:22 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:39:04 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,18 @@
 # define TRUE 1
 # define FALSE 0
 
-# define THINK "is thinking"
-# define SLEEP "is sleeping"
-# define FORK "has taken a fork"
-# define EAT "is eating"
-# define DIE "has died"
+# define THINK 10
+# define SLEEP 11
+# define FORK 12
+# define EAT 13
+# define DIE 14
 
 typedef struct s_philo
 {
 	int				id;
-	pthread_mutex_t	*forks;
-	int				last_meal;
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
+	long int		last_meal;
 	int				is_full;
 	struct s_info	*data;
 }	t_philo;
@@ -47,6 +48,7 @@ typedef struct s_info
 	int				has_anyone_died;
 	long int		start_time;
 	t_philo			*philos;
+	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	stop_mutex;
 	pthread_mutex_t	full_mutex;
@@ -69,6 +71,6 @@ void		display_error_msg(int error);
 int			launch_threads(t_info *philos);
 
 //time.c
-long int	get_start_time(void);
-long int	get_current_time(long int start);
+long int	get_current_time(void);
+void	my_sleep(int sleep, long int last_meal);
 #endif
