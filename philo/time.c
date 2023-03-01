@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:27:24 by rabustam          #+#    #+#             */
-/*   Updated: 2023/03/01 16:23:51 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:38:39 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	*check_time(void *ptr)
 		pthread_mutex_unlock(&data->full_mutex);
 		if (++i == data->n_philos)
 			i = 0;
-		usleep(2500);
+		usleep(2000);
 	}
 	return (NULL);
 }
