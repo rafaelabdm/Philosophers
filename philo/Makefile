@@ -6,11 +6,11 @@
 #    By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/14 17:47:18 by rabustam          #+#    #+#              #
-#    Updated: 2023/02/27 18:07:46 by rabustam         ###   ########.fr        #
+#    Updated: 2023/03/02 15:48:10 by rabustam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= philosophers
+NAME		= philo
 
 SRC			= main.c philo_utils.c error.c threads.c time.c init.c
 

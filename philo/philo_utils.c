@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:19:13 by rabustam          #+#    #+#             */
-/*   Updated: 2023/03/01 16:22:36 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:47:45 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ long int	philo_print(t_philo *phi, int act)
 {
 	long int	time;
 
-	time = get_current_time();
 	pthread_mutex_lock(&phi->data->print_mutex);
+	time = get_current_time();
 	if (act == FORK)
 		printf("%ld %d has taken a fork.\n%ld %d has taken a fork.\n", \
 			time - phi->data->start_time, phi->id + 1, \
