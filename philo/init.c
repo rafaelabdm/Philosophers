@@ -6,7 +6,7 @@
 /*   By: rabustam <rabustam@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:53:33 by rabustam          #+#    #+#             */
-/*   Updated: 2023/03/01 16:02:22 by rabustam         ###   ########.fr       */
+/*   Updated: 2023/03/03 17:19:35 by rabustam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static pthread_mutex_t	*alloc_forks(int n_philos)
 
 	ret = malloc(n_philos * sizeof(pthread_mutex_t));
 	if (!ret)
-		exit(11);
+		return (NULL);
 	return (ret);
 }
 
